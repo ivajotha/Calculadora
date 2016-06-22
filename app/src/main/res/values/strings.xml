@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Calculadora</string>
-    <string name="txtcero">0</string>
+    <string name="app_name">Calculator</string>
     <string name="txBtnDecimal">Decimal</string>
-    <string name="txBtnBinari">Binario</string>
+    <string name="txBtnBinari">Binary</string>
 </resources>
