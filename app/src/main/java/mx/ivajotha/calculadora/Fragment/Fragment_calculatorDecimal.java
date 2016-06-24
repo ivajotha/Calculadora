@@ -57,10 +57,10 @@ public class Fragment_calculatorDecimal extends Fragment {
 
             num1 = num1 - num2;
             display.setText(Float.toString(num1));
-        } else if (operator.equals("*")) {
 
+        } else if (operator.equals("*")) {
+            stringOper = display.getText().toString();
             if(stringOper != "Infinity" || stringOper != "NaN") {
-                stringOper = display.getText().toString();
                 String[] parts = stringOper.split("\\" + operator);
                 num1 = Float.parseFloat(parts[0]);
                 num2 = Float.parseFloat(parts[1]);
@@ -70,15 +70,13 @@ public class Fragment_calculatorDecimal extends Fragment {
 
                 display.setText("");
             }
-            oper_div = false;
-            operator = "";
 
 
         } else if (operator.equals("/")) {
 
             stringOper = display.getText().toString();
 
-            if(stringOper != "Infinity" || stringOper != "NaN") {
+            //if(stringOper != "Infinity" || stringOper != "NaN") {
 
                 String[] parts = stringOper.split(operator);
                 num1 = Float.parseFloat(parts[0]);
@@ -86,50 +84,58 @@ public class Fragment_calculatorDecimal extends Fragment {
                 num1 = num1 / num2;
                 display.setText(Float.toString(num1));
 
-            }else{
+            //}else{
 
-                display.setText("");
-            }
-            oper_div = false;
-            operator = "";
+            //    display.setText("");
+           // }
         }
     }
 
     /** Click btn Number**/
     View.OnClickListener clickNumber = new View.OnClickListener() {
         public void onClick(View view) {
+            Button b = (Button)view;
             Editable str = display.getText();
-            str = str.append(zero.getText());
+            str = str.append(b.getText().toString());
             display.setText(str);
             last_num = true;
 
         }
     };
 
+    /** Click btn Operator**/
+    View.OnClickListener clickOperator = new View.OnClickListener() {
+        public void onClick(View view) {
+            if (!oper_div && last_num) {
+                Button b = (Button)view;
+                Editable str = display.getText();
+                str = str.append(b.getText().toString());
+                display.setText(str);
+                oper_div = true;
+                last_num = false;
+                operator = b.getText().toString();
+            }
+        }
+    };
+
+    View.OnClickListener clicResult = new View.OnClickListener() {
+        public void onClick(View view) {
+            if (oper_div && last_num){
+                setOperation();
+                oper_div = false;
+                last_num = true;
+                operator = "";
+            }
+        }
+    };
+
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.calculator_decimal, container, false);
 
-        display = (EditText) v.findViewById(R.id.displayOperations);
-
-        zero = (Button) v.findViewById(R.id.num_0);
-        one = (Button) v.findViewById(R.id.num_1);
-        two = (Button) v.findViewById(R.id.num_2);
-        three = (Button) v.findViewById(R.id.num_3);
-        four= (Button) v.findViewById(R.id.num_4);
-        five = (Button) v.findViewById(R.id.num_5);
-        six = (Button) v.findViewById(R.id.num_6);
-        seven = (Button) v.findViewById(R.id.num_7);
-        eight = (Button) v.findViewById(R.id.num_8);
-        nine = (Button) v.findViewById(R.id.num_9);
-        point = (Button) v.findViewById(R.id.btn_point);
-        equal = (Button) v.findViewById(R.id.btn_equal);
-
-        div = (Button) v.findViewById(R.id.oper_div);
-        mul = (Button) v.findViewById(R.id.oper_mul);
-
-
+/*
         equal.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -138,6 +144,7 @@ public class Fragment_calculatorDecimal extends Fragment {
                 }
             }
         });
+
 
         point.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -155,44 +162,29 @@ public class Fragment_calculatorDecimal extends Fragment {
                 }
             }
         });
+        */
+
+        display = (EditText) v.findViewById(R.id.displayOperations);
+
+        zero = (Button) v.findViewById(R.id.num_0);
+        one = (Button) v.findViewById(R.id.num_1);
+        two = (Button) v.findViewById(R.id.num_2);
+        three = (Button) v.findViewById(R.id.num_3);
+        four= (Button) v.findViewById(R.id.num_4);
+        five = (Button) v.findViewById(R.id.num_5);
+        six = (Button) v.findViewById(R.id.num_6);
+        seven = (Button) v.findViewById(R.id.num_7);
+        eight = (Button) v.findViewById(R.id.num_8);
+        nine = (Button) v.findViewById(R.id.num_9);
+        point = (Button) v.findViewById(R.id.btn_point);
+        equal = (Button) v.findViewById(R.id.btn_equal);
+
+        sub = (Button) v.findViewById(R.id.oper_rest);
+        div = (Button) v.findViewById(R.id.oper_div);
+        mul = (Button) v.findViewById(R.id.oper_mul);
+        add = (Button) v.findViewById(R.id.oper_mas);
 
 
-        div.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (!oper_div && last_num) {
-                    Editable str = display.getText();
-                    if (num2 != 0) {
-                        num2 = 0;
-                        display.setText("");
-                    }
-                    str = str.append(div.getText());
-                    display.setText(str);
-                    oper_div = true;
-                    operator = "/";
-                }
-            }
-        });
-
-        mul.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (!oper_div && last_num) {
-                    Editable str = display.getText();
-                    if (num2 != 0) {
-                        num2 = 0;
-                        display.setText("");
-                    }
-                    str = str.append(mul.getText());
-                    display.setText(str);
-                    oper_div = true;
-                    operator = "*";
-                }
-            }
-        });
-
-
-        /** Click de Botones de Numero **/
         zero.setOnClickListener(clickNumber);
         one.setOnClickListener(clickNumber);
         two.setOnClickListener(clickNumber);
@@ -203,6 +195,12 @@ public class Fragment_calculatorDecimal extends Fragment {
         seven.setOnClickListener(clickNumber);
         eight.setOnClickListener(clickNumber);
         nine.setOnClickListener(clickNumber);
+
+        equal.setOnClickListener(clicResult);
+        sub.setOnClickListener(clickOperator);
+        add.setOnClickListener(clickOperator);
+        mul.setOnClickListener(clickOperator);
+        div.setOnClickListener(clickOperator);
 
 
         return v;

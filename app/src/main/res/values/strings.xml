@@ -4,4 +4,5 @@
     <string name="txBtnBinari">Binary</string>
     <string name="titleCBinary">Binary operations</string>
     <string name="titleCDecimal">Decimal operations</string>
+    <string name="txBtnClear">C</string>
 </resources>
