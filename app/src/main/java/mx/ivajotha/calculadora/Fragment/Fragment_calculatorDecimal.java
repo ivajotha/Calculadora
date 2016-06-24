@@ -26,7 +26,7 @@ public class Fragment_calculatorDecimal extends Fragment {
     private EditText display;
     private Button zero, one, two, three, four, five, six, seven, eight, nine, point ,div, sub, mul, add, equal;
     private float num1, num2;
-    private boolean lasdot, oper_div, last_num;
+    private boolean endOp, oper_div, last_num;
 
     public static Fragment_calculatorDecimal newInstance(String titulo){
 
@@ -46,48 +46,75 @@ public class Fragment_calculatorDecimal extends Fragment {
 
     public void setOperation() {
         if (operator.equals("+")) {
-            num2 = Float.parseFloat(display.getText().toString());
-            display.setText("");
-            num1 = num1 + num2;
-            display.setText(Float.toString(num1));
-        } else if (operator.equals("-")) {
 
-            num2 = Float.parseFloat(display.getText().toString());
-            display.setText("");
-
-            num1 = num1 - num2;
-            display.setText(Float.toString(num1));
-
-        } else if (operator.equals("*")) {
             stringOper = display.getText().toString();
-            if(stringOper != "Infinity" || stringOper != "NaN") {
-                String[] parts = stringOper.split("\\" + operator);
-                num1 = Float.parseFloat(parts[0]);
-                num2 = Float.parseFloat(parts[1]);
-                num1 = num1 * num2;
-                display.setText(Float.toString(num1));
-            }else{
+            String[] parts = stringOper.split("\\" + operator);
+            num1 = Float.parseFloat(parts[0]);
+            num2 = Float.parseFloat(parts[1]);
+            num1 = num1 + num2;
 
-                display.setText("");
+            /** Valida Infinity y NaN **/
+            double d = (double) num1;
+
+            if(Double.isInfinite(d) || Double.isNaN(d)){
+                display.setText("0");
+            }else{
+                display.setText(Float.toString(num1));
             }
 
 
-        } else if (operator.equals("/")) {
+        } else if (operator.equals("-")) {
 
             stringOper = display.getText().toString();
+            String[] parts = stringOper.split("\\" + operator);
+            num1 = Float.parseFloat(parts[0]);
+            num2 = Float.parseFloat(parts[1]);
+            num1 = num1 - num2;
 
-            //if(stringOper != "Infinity" || stringOper != "NaN") {
+            /** Valida Infinity y NaN **/
+            double d = (double) num1;
 
+            if(Double.isInfinite(d) || Double.isNaN(d)){
+                display.setText("0");
+            }else{
+                display.setText(Float.toString(num1));
+            }
+
+        } else if (operator.equals("*")) {
+
+            stringOper = display.getText().toString();
+            String[] parts = stringOper.split("\\" + operator);
+            num1 = Float.parseFloat(parts[0]);
+            num2 = Float.parseFloat(parts[1]);
+            num1 = num1 * num2;
+
+            /** Valida Infinity y NaN **/
+            double d = (double) num1;
+
+            if(Double.isInfinite(d) || Double.isNaN(d)){
+                display.setText("0");
+            }else{
+                display.setText(Float.toString(num1));
+            }
+
+        } else if (operator.equals("/")) {
+
+                stringOper = display.getText().toString();
                 String[] parts = stringOper.split(operator);
                 num1 = Float.parseFloat(parts[0]);
                 num2 = Float.parseFloat(parts[1]);
                 num1 = num1 / num2;
-                display.setText(Float.toString(num1));
 
-            //}else{
+                /** Valida Infinity y NaN **/
+                double d = (double) num1;
 
-            //    display.setText("");
-           // }
+                if(Double.isInfinite(d) || Double.isNaN(d)){
+                    display.setText("0");
+                }else{
+                    display.setText(Float.toString(num1));
+                }
+
+
         }
     }
 
@@ -96,9 +123,20 @@ public class Fragment_calculatorDecimal extends Fragment {
         public void onClick(View view) {
             Button b = (Button)view;
             Editable str = display.getText();
+
+            if(endOp){
+                display.setText("");
+                str = display.getText();
+                last_num = true;
+                oper_div = false;
+                endOp = false;
+            }else{
+                last_num = true;
+            }
+
             str = str.append(b.getText().toString());
             display.setText(str);
-            last_num = true;
+
 
         }
     };
@@ -113,6 +151,7 @@ public class Fragment_calculatorDecimal extends Fragment {
                 display.setText(str);
                 oper_div = true;
                 last_num = false;
+                endOp = false;
                 operator = b.getText().toString();
             }
         }
@@ -124,6 +163,7 @@ public class Fragment_calculatorDecimal extends Fragment {
                 setOperation();
                 oper_div = false;
                 last_num = true;
+                endOp = true;
                 operator = "";
             }
         }
@@ -134,35 +174,6 @@ public class Fragment_calculatorDecimal extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.calculator_decimal, container, false);
-
-/*
-        equal.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                if (oper_div){
-                    setOperation();
-                }
-            }
-        });
-
-
-        point.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Editable str = display.getText();
-                if (!lasdot) {
-                    if (num2 != 0) {
-                        num2 = 0;
-                        display.setText("");
-                    }
-
-                    str = str.append(point.getText());
-                    display.setText(str);
-                    lasdot = true;
-                }
-            }
-        });
-        */
 
         display = (EditText) v.findViewById(R.id.displayOperations);
 
