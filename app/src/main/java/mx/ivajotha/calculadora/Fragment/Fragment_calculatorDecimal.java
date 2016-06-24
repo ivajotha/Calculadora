@@ -24,7 +24,7 @@ public class Fragment_calculatorDecimal extends Fragment {
 
     private String operator, stringOper;
     private EditText display;
-    private Button zero, one, two, three, four, five, six, seven, eight, nine, point ,div, sub, mul, add, equal;
+    private Button zero, one, two, three, four, five, six, seven, eight, nine, point ,div, sub, mul, add, equal, mod;
     private float num1, num2;
     private boolean endOp, oper_div, last_num;
 
@@ -115,6 +115,22 @@ public class Fragment_calculatorDecimal extends Fragment {
                 }
 
 
+        } else if (operator.equals("mod")) {
+
+            stringOper = display.getText().toString();
+            String[] parts = stringOper.split(operator);
+            num1 = Float.parseFloat(parts[0]);
+            num2 = Float.parseFloat(parts[1]);
+            num1 = num1%num2;
+
+            /** Valida Infinity y NaN **/
+            double d = (double) num1;
+
+            if(Double.isInfinite(d) || Double.isNaN(d)){
+                display.setText("0");
+            }else{
+                display.setText(Float.toString(num1));
+            }
         }
     }
 
@@ -194,6 +210,7 @@ public class Fragment_calculatorDecimal extends Fragment {
         div = (Button) v.findViewById(R.id.oper_div);
         mul = (Button) v.findViewById(R.id.oper_mul);
         add = (Button) v.findViewById(R.id.oper_mas);
+        mod = (Button) v.findViewById(R.id.oper_mod);
 
 
         zero.setOnClickListener(clickNumber);
@@ -212,6 +229,7 @@ public class Fragment_calculatorDecimal extends Fragment {
         add.setOnClickListener(clickOperator);
         mul.setOnClickListener(clickOperator);
         div.setOnClickListener(clickOperator);
+        mod.setOnClickListener(clickOperator);
 
 
         return v;
