@@ -202,57 +202,7 @@
             </LinearLayout>
 
         </LinearLayout>
-<!--
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:orientation="vertical"
-            android:background="#e8e8e8">
 
-            <Button
-                android:id="@+id/oper_div"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/marginBtn"
-                android:layout_weight="1"
-                android:textSize="@dimen/txtSizeBtns"
-                android:text="/"
-                />
-            <Button
-                android:id="@+id/oper_mul"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txtSizeBtns"
-                android:layout_weight="1"
-                android:text="X"
-                />
-            <Button
-                android:id="@+id/oper_rest"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txtSizeBtns"
-                android:layout_weight="1"
-                android:text="-"
-                />
-            <Button
-                android:id="@+id/oper_mas"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txtSizeBtns"
-                android:layout_weight="1"
-                android:text="+"
-                />
-            <Button
-                android:id="@+id/oper_mod"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/txtSizeBtns"
-                android:layout_weight="1"
-                android:text="mod"
-                />
-        </LinearLayout>
-        -->
     </LinearLayout>
 
 </LinearLayout>
