@@ -225,7 +225,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/txtSizeBtns"
                 android:layout_weight="1"
-                android:text="X"
+                android:text="*"
                 />
             <Button
                 android:id="@+id/oper_rest"
