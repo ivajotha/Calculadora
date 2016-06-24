@@ -38,12 +38,6 @@ public class Fragment_calculatorDecimal extends Fragment {
         return f;
     }
 
-
-    public void splidOperator(String string, String oper, String typeSet) {
-        String[] parts = string.split(oper);
-    }
-
-
     public void setOperation() {
         if (operator.equals("+")) {
 

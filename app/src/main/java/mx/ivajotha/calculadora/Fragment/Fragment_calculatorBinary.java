@@ -6,6 +6,8 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 import mx.ivajotha.calculadora.R;
 
@@ -14,6 +16,11 @@ import mx.ivajotha.calculadora.R;
  */
 public class Fragment_calculatorBinary extends Fragment {
 
+    private String operator, stringOper;
+    private EditText display;
+    private Button zero, one, two, three, four, five, six, seven, eight, nine, add, equal;
+    private float num1, num2;
+    private boolean endOp, oper_div, last_num;
 
 
     public static Fragment_calculatorBinary newInstance(String titulo) {
