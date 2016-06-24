@@ -3,4 +3,6 @@
     <string name="app_name">Calculadora</string>
     <string name="txBtnDecimal">Decimal</string>
     <string name="txBtnBinari">Binario</string>
+    <string name="titleCBinary">Operaciones Binarias</string>
+    <string name="titleCDecimal">Operaciones Decimal</string>
 </resources>

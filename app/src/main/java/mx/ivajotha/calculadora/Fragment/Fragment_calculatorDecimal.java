@@ -23,8 +23,9 @@ public class Fragment_calculatorDecimal extends Fragment {
 
    public static Fragment_calculatorDecimal newInstance(String titulo){
 
-        Fragment_calculatorDecimal f = new Fragment_calculatorDecimal();
         Bundle b = new Bundle();
+
+       Fragment_calculatorDecimal f = new Fragment_calculatorDecimal();
         b.putString("titulo_key",titulo);
         f.setArguments(b);
         return f;

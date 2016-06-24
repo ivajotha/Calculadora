@@ -9,18 +9,17 @@
         android:orientation="vertical"
         android:layout_weight="0.1">
 
-        <EditText
-            android:id="@+id/displaySummary"
-            android:background="#111"
-            android:textColor="#fff"
-            android:layout_weight="1"
-            android:layout_margin="@dimen/notmargin"
-            android:padding="@dimen/display_pading"
+        <TextView
+            android:id="@+id/titleFragment"
             android:layout_width="match_parent"
-            android:textSize="@dimen/txtSizeDisplay"
             android:layout_height="match_parent"
-            android:focusable="false"
-            />
+            android:textSize="@dimen/txtSizeDisplay"
+            android:layout_margin="@dimen/notmargin"
+            android:textColor="@color/colorblack"
+            android:layout_weight="1"
+            android:textAlignment="center"
+            android:text="@string/titleCDecimal"/>
+
         <EditText
             android:id="@+id/displayOperations"
             android:background="#111"
@@ -243,6 +242,14 @@
                 android:textSize="@dimen/txtSizeBtns"
                 android:layout_weight="1"
                 android:text="+"
+                />
+            <Button
+                android:id="@+id/oper_mod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/txtSizeBtns"
+                android:layout_weight="1"
+                android:text="mod"
                 />
         </LinearLayout>
     </LinearLayout>
