@@ -1,6 +1,7 @@
 package mx.ivajotha.calculadora.Fragment;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
@@ -27,19 +28,21 @@ public class Fragment_calculatorDecimal extends Fragment {
     private float num1, num2;
     private boolean lasdot, oper_div, last_num;
 
-   public static Fragment_calculatorDecimal newInstance(String titulo){
+    public static Fragment_calculatorDecimal newInstance(String titulo){
 
         Bundle b = new Bundle();
 
-       Fragment_calculatorDecimal f = new Fragment_calculatorDecimal();
+        Fragment_calculatorDecimal f = new Fragment_calculatorDecimal();
         b.putString("titulo_key",titulo);
         f.setArguments(b);
         return f;
     }
 
+
     public void splidOperator(String string, String oper, String typeSet) {
         String[] parts = string.split(oper);
     }
+
 
     public void setOperation() {
         if (operator.equals("+")) {
@@ -91,6 +94,17 @@ public class Fragment_calculatorDecimal extends Fragment {
             operator = "";
         }
     }
+
+    /** Click btn Number**/
+    View.OnClickListener clickNumber = new View.OnClickListener() {
+        public void onClick(View view) {
+            Editable str = display.getText();
+            str = str.append(zero.getText());
+            display.setText(str);
+            last_num = true;
+
+        }
+    };
 
     @Nullable
     @Override
@@ -178,159 +192,17 @@ public class Fragment_calculatorDecimal extends Fragment {
         });
 
 
-        zero.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(zero.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-
-        one.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(one.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-
-        two.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(two.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-
-        three.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(three.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-        four.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(four.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-        five.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(five.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-        six.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(six.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-        seven.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(seven.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-        eight.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(eight.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
-
-
-        nine.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-
-                Editable str = display.getText();
-                if (num2 != 0) {
-                    num2 = 0;
-                    display.setText("");
-                }
-                str = str.append(nine.getText());
-                display.setText(str);
-                last_num = true;
-            }
-        });
+        /** Click de Botones de Numero **/
+        zero.setOnClickListener(clickNumber);
+        one.setOnClickListener(clickNumber);
+        two.setOnClickListener(clickNumber);
+        three.setOnClickListener(clickNumber);
+        four.setOnClickListener(clickNumber);
+        five.setOnClickListener(clickNumber);
+        six.setOnClickListener(clickNumber);
+        seven.setOnClickListener(clickNumber);
+        eight.setOnClickListener(clickNumber);
+        nine.setOnClickListener(clickNumber);
 
 
         return v;
