@@ -14,6 +14,8 @@ import mx.ivajotha.calculadora.R;
  */
 public class Fragment_calculatorBinary extends Fragment {
 
+
+
     public static Fragment_calculatorBinary newInstance(String titulo) {
         
         Bundle args = new Bundle();

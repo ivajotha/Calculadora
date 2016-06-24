@@ -12,11 +12,10 @@
         <TextView
             android:id="@+id/titleFragment"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:textSize="@dimen/txtSizeDisplay"
             android:layout_margin="@dimen/notmargin"
             android:textColor="@color/colorblack"
-            android:layout_weight="1"
             android:textAlignment="center"
             android:textAllCaps="true"
             android:text="@string/titleCDecimal"/>
@@ -27,9 +26,9 @@
             android:textColor="#fff"
             android:gravity="right"
             android:textSize="@dimen/txtSizeDisplay"
-            android:layout_weight="1"
             android:layout_margin="@dimen/notmargin"
             android:padding="@dimen/display_pading"
+            android:scrollbars = "vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="false"
