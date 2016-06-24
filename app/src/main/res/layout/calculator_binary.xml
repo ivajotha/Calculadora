@@ -18,6 +18,7 @@
             android:textColor="@color/colorblack"
             android:layout_weight="1"
             android:textAlignment="center"
+            android:textAllCaps="true"
             android:text="@string/titleCBinary"/>
 
         <EditText
