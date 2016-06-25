@@ -224,7 +224,7 @@ public class Fragment_calculatorDecimal extends Fragment {
         mul.setOnClickListener(clickOperator);
         div.setOnClickListener(clickOperator);
         mod.setOnClickListener(clickOperator);
-
+        display.setText("");
 
         return v;
     }

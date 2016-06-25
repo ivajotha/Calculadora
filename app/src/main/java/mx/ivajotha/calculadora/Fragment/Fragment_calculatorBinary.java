@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ public class Fragment_calculatorBinary extends Fragment {
     private EditText display;
     private Button zero, one, two, three, four, five, six, seven, eight, nine, add, equal;
     private boolean endOp, oper_div, last_num;
+    private Integer num1, num2;
 
 
     public static Fragment_calculatorBinary newInstance(String titulo) {
@@ -32,47 +34,27 @@ public class Fragment_calculatorBinary extends Fragment {
         return fragment;
     }
 
-    public static int binaryToDecimal(String numeroBinario){
-        int longitud = numeroBinario.length();
-        int resultado = 0;
-        int potencia = longitud - 1;
-            for(int i = 0;i < longitud;i++){
-                if(numeroBinario.charAt(i) == '1'){
-                    resultado += Math.pow(2,potencia);
-                } potencia --;
-            }
-        return resultado;
-    }
-
-    public  String operacionBinaria(char operador,String numero1, String numero2){
-        int n1Decimal = binaryToDecimal(numero1);
-        int n2Decimal = binaryToDecimal(numero2);
-
-            return (decimalToBinary(n1Decimal + n2Decimal));
-    }
-
-    public String decimalToBinary(int numeroDecimal){
-        int temp = numeroDecimal;
-        String resultado = "";
-        while (temp != 0){
-            if(temp % 2 == 0){
-                resultado = "0" + resultado;
-            }else{
-                resultado = "1" + resultado;
-            }
-            temp = temp / 2;
+    /* converción a Binario*/
+    public static long toBinary(int n)
+    {
+        String b = "";
+        while (n != 0) {
+            int r = (int)(n % 2);
+            b = r + b;
+            n /= 2;
         }
-        return resultado;
+        return Long.parseLong(b);
     }
 
+    /** Realiza la uperiacin de SUMA **/
     public void setOperation() {
-        if (operator.equals("+")) {
-
             stringOper = display.getText().toString();
             String[] parts = stringOper.split("\\" + operator);
-            String resultado = operacionBinaria('+',parts[0],parts[1]);
-            display.setText(resultado);
-        }
+            num1 = Integer.parseInt(parts[0]);
+            num2 = Integer.parseInt(parts[1]);
+            String tbinary_ = Long.toString(toBinary(num1 + num2));
+            display.setText(tbinary_);
+
     }
 
     /** Click btn Number**/
@@ -93,8 +75,6 @@ public class Fragment_calculatorBinary extends Fragment {
 
             str = str.append(b.getText().toString());
             display.setText(str);
-
-
         }
     };
 
@@ -114,12 +94,13 @@ public class Fragment_calculatorBinary extends Fragment {
         }
     };
 
+
     View.OnClickListener clicResult = new View.OnClickListener() {
         public void onClick(View view) {
             if (oper_div && last_num){
                 setOperation();
                 oper_div = false;
-                last_num = true;
+                last_num = false;
                 endOp = true;
                 operator = "";
             }
@@ -161,6 +142,7 @@ public class Fragment_calculatorBinary extends Fragment {
 
         equal.setOnClickListener(clicResult);
         add.setOnClickListener(clickOperator);
+        display.setText("");
 
         return v;
     }
